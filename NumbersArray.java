@@ -21,6 +21,8 @@ public class NumbersArray {
 
     // Write your methods here
     public static int findMax(Integer[] input) {
+        if (input == null) return -1;
+
         int max = 0;
         for (int n : input) {
             if (n > max) {
@@ -31,6 +33,8 @@ public class NumbersArray {
     }
 
     public static Integer[] findDuplicates(Integer[] input) {
+        if (input == null) return null;
+
         Set<Integer> seen = new HashSet<>();
         Set<Integer> duplicates = new LinkedHashSet<>();
 
@@ -44,20 +48,19 @@ public class NumbersArray {
     }
 
     public static Integer[] findUnique(Integer[] input) {
-        Map<Integer, Integer> countMap = new LinkedHashMap<>();
+        if (input == null) return null;
 
-        for (Integer n : input) {
-            countMap.merge(n, 1, Integer::sum);
-        }
+        ArrayList<Integer> unique = new ArrayList<>();
 
-        List<Integer> result = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> entry : countMap.entrySet()) {
-            if (entry.getValue() == 1) {
-                result.add(entry.getKey());
+        for (Integer num : input) {
+            if (!unique.contains(num)) {
+                unique.add(num);
+            } else {
+                unique.remove(num);
             }
         }
 
-        return result.toArray(new Integer[0]);
+        return unique.toArray(new Integer[0]);
     }
     
 }
